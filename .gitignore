@@ -1,0 +1,17 @@
+# Project planning files
+proje.txt
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vs/
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Logs
+*.log
+
