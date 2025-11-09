@@ -17,25 +17,25 @@ Kullanıcıların mesajlaşarak sohbet edebildiği, yazışmaların AI tarafınd
 
 ```
 sentiment-chat-evaluator/
-├── frontend/          # React web uygulaması
-├── mobile/            # React Native CLI mobil uygulama
-├── backend/           # .NET Core API
-├── ai-service/        # Python AI servisi (Hugging Face Spaces)
-└── README.md          # Bu dosya
+├── vibechat-web/          # React web uygulaması
+├── vibechat-mobile/       # React Native CLI mobil uygulama
+├── backend/               # .NET Core API
+├── vibechat-ai-service/   # Python AI servisi (Hugging Face Spaces)
+└── README.md              # Bu dosya
 ```
 
 ## Kurulum
 
 ### Frontend (Web)
 ```bash
-cd frontend
+cd vibechat-web
 npm install
 npm start
 ```
 
 ### Mobile
 ```bash
-cd mobile
+cd vibechat-mobile
 npm install
 npx react-native run-android
 ```
@@ -49,7 +49,7 @@ dotnet run
 
 ### AI Service
 ```bash
-cd ai-service
+cd vibechat-ai-service
 pip install -r requirements.txt
 python app.py
 ```
