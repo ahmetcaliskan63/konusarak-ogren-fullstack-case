@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35931.197 d17.13
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VibeChat.Api", "VibeChat.Api\VibeChat.Api.csproj", "{59DF3FA8-DB0C-47F9-830A-BFFDA808FCC8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{59DF3FA8-DB0C-47F9-830A-BFFDA808FCC8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{59DF3FA8-DB0C-47F9-830A-BFFDA808FCC8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{59DF3FA8-DB0C-47F9-830A-BFFDA808FCC8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{59DF3FA8-DB0C-47F9-830A-BFFDA808FCC8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {58F1EE40-FC35-454B-8BA7-090A1F25ABFE}
+	EndGlobalSection
+EndGlobal
