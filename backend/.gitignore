@@ -44,5 +44,5 @@ bld/
 [Ll]ogs/
 
 # Database (optional - uncomment for production)
-# *.db
+vibechat.db
 
