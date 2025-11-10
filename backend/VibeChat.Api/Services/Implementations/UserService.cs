@@ -2,63 +2,45 @@
 using VibeChat.Api.Features.Users.Domain;
 using VibeChat.Api.Features.Users.Dtos;
 using VibeChat.Api.Infrastructure.Data;
+using VibeChat.Api.Services.Abstractions;
 
 namespace VibeChat.Api.Services.Implementations
 {
-    public class UserService
+    public class UserService : IUserService
     {
-        private readonly ApplicationDbContext _context;
+        private readonly ApplicationDbContext _db;
+        private readonly ILogger<UserService> _logger;
 
-        public UserService(ApplicationDbContext context)
+        public UserService(ApplicationDbContext db, ILogger<UserService> logger)
         {
-            _context = context;
+            _db = db;
+            _logger = logger;
         }
 
         public async Task<UserDto> CreateUserAsync(CreateUserDto dto)
         {
-            var username = dto.Username.Trim();
-
-            if (await _context.Users.AnyAsync(u => u.Username == username))
+            var name = dto.Username.Trim();
+            if (await _db.Users.AnyAsync(u => u.Username == name))
                 throw new InvalidOperationException("Bu kullanıcı adı zaten kullanılıyor");
 
-            var user = new User { Username = username };
+            var user = new User { Username = name };
+            _db.Users.Add(user);
+            await _db.SaveChangesAsync();
 
-            _context.Users.Add(user);
-            await _context.SaveChangesAsync();
-
-            return new UserDto
-            {
-                Id = user.Id,
-                Username = user.Username,
-                CreatedAt = user.CreatedAt
-            };
+            return new UserDto { Id = user.Id, Username = user.Username, CreatedAt = user.CreatedAt };
         }
 
         public async Task<List<UserDto>> GetUsersAsync()
         {
-            return await _context.Users
-                .Select(u => new UserDto
-                {
-                    Id = u.Id,
-                    Username = u.Username,
-                    CreatedAt = u.CreatedAt
-                })
+            return await _db.Users
+                .Select(u => new UserDto { Id = u.Id, Username = u.Username, CreatedAt = u.CreatedAt })
                 .ToListAsync();
         }
 
         public async Task<UserDto?> GetUserByIdAsync(int id)
         {
-            var user = await _context.Users.FindAsync(id);
-
-            if (user == null)
-                return null;
-
-            return new UserDto
-            {
-                Id = user.Id,
-                Username = user.Username,
-                CreatedAt = user.CreatedAt
-            };
+            var u = await _db.Users.FindAsync(id);
+            return u == null ? null : new UserDto { Id = u.Id, Username = u.Username, CreatedAt = u.CreatedAt };
         }
     }
 }

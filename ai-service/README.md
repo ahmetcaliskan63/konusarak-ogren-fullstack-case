@@ -4,8 +4,8 @@ Hugging Face Spaces'de çalışan duygu analizi servisi.
 
 ## Model
 
-- **Model**: `cardiffnlp/twitter-roberta-base-sentiment-latest`
-- **Dil**: Türkçe ve İngilizce destekli
+- **Model**: `savasy/bert-base-turkish-sentiment-cased`
+- **Dil**: Türkçe (özellikle Türkçe için eğitilmiş BERT modeli)
 - **Çıktı**: Pozitif, Nötr, Negatif + Güven skorları
 
 ## Yerel Çalıştırma

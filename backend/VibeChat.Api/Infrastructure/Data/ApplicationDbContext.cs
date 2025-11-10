@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using VibeChat.Api.Features.Messages.Domain;
 using VibeChat.Api.Features.Users.Domain;
+using VibeChat.Api.Infrastructure.Configurations;
 
 namespace VibeChat.Api.Infrastructure.Data
 {

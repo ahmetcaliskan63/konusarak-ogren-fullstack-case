@@ -1,5 +1,3 @@
-# Project planning files
-proje.txt
 
 # OS
 .DS_Store
@@ -14,4 +12,8 @@ Thumbs.db
 
 # Logs
 *.log
+
+# Project management files (keep local, don't push)
+ANALIZ_RAPORU.md
+git_cleanup_commands.txt
 

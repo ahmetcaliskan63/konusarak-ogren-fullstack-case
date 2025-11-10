@@ -2,6 +2,7 @@ import gradio as gr
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
 from scipy.special import softmax
 import torch
+import json
 
 model_name = "savasy/bert-base-turkish-sentiment-cased"
 tokenizer = None
@@ -81,6 +82,14 @@ def analyze_sentiment(text):
             "error": str(e)
         }
 
+# API endpoint için direkt fonksiyon (JSON döndürür)
+def analyze_sentiment_api(text):
+    """
+    HTTP API için JSON döndüren fonksiyon
+    """
+    result = analyze_sentiment(text)
+    return json.dumps(result, ensure_ascii=False)
+
 def sentiment_interface(text):
     result = analyze_sentiment(text)
     
@@ -107,24 +116,24 @@ def sentiment_interface(text):
     
     return output
 
-demo = gr.Interface(
-    fn=sentiment_interface,
+# Tek bir Interface - hem web hem API için JSON döndürür
+app = gr.Interface(
+    fn=analyze_sentiment_api,  # JSON string döndüren fonksiyon
     inputs=gr.Textbox(
         label="Mesaj",
         placeholder="Analiz etmek istediğiniz metni girin...",
         lines=3
     ),
-    outputs=gr.Markdown(label="Duygu Analizi Sonucu"),
+    outputs=gr.JSON(label="Duygu Analizi Sonucu"),  # JSON output
     title="Sentiment Analyzer - Duygu Analizi",
-    description="Metinlerin duygu durumunu analiz eder (Pozitif/Nötr/Negatif)",
+    description="Metinlerin duygu durumunu analiz eder (Pozitif/Nötr/Negatif) - JSON API",
     examples=[
         ["Bugün harika bir gün geçirdim!"],
         ["Her şey normal, özel bir durum yok."],
         ["Bu durumdan hiç memnun değilim."]
-    ]
+    ],
+    api_name="predict"  # API endpoint adı (bu çalışıyor!)
 )
 
 if __name__ == "__main__":
-    demo.launch(server_name="0.0.0.0", server_port=7860)
-
-
+    app.launch(server_name="0.0.0.0", server_port=7860)

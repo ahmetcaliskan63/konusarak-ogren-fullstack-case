@@ -1,16 +1,12 @@
 using Microsoft.EntityFrameworkCore;
 using VibeChat.Api.Infrastructure.Data;
 using VibeChat.Api.Services.Abstractions;
+using VibeChat.Api.Services.Implementations;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection")
-                      ?? "Data Source=vibechat.db";
-
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
-{
-    options.UseSqlite(connectionString);
-});
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? "Data Source=vibechat.db";
+builder.Services.AddDbContext<ApplicationDbContext>(opts => opts.UseSqlite(connectionString));
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
@@ -26,7 +22,7 @@ builder.Services.AddCors(options =>
                 try
                 {
                     var host = new Uri(origin).Host;
-                    return host.Equals("localhost") || host.EndsWith("vercel.app");
+                    return host.EndsWith("vercel.app") || host.Equals("localhost");
                 }
                 catch { return false; }
             })
@@ -41,8 +37,8 @@ builder.Services.AddHttpClient<ISentimentService, SentimentService>(c =>
     c.Timeout = TimeSpan.FromSeconds(30);
 });
 
-builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IMessageService, MessageService>();
+builder.Services.AddScoped<IUserService, UserService>();
 
 var app = builder.Build();
 
@@ -50,11 +46,7 @@ app.UseSwagger();
 app.UseSwaggerUI();
 
 app.UseCors("AllowFrontend");
-
 app.UseHttpsRedirection();
-
-app.UseAuthorization();
-
 app.MapControllers();
 
 using (var scope = app.Services.CreateScope())
@@ -64,7 +56,7 @@ using (var scope = app.Services.CreateScope())
 }
 
 var port = Environment.GetEnvironmentVariable("PORT");
-if (!string.IsNullOrWhiteSpace(port))
+if (!string.IsNullOrEmpty(port))
 {
     app.Urls.Add($"http://0.0.0.0:{port}");
 }

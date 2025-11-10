@@ -6,55 +6,47 @@ using VibeChat.Api.Services.Abstractions;
 
 namespace VibeChat.Api.Services.Implementations
 {
-    public class MessageService
+    public class MessageService : IMessageService
     {
-        private readonly ApplicationDbContext _context;
-        private readonly ISentimentService _sentimentService;
+        
+        private readonly ApplicationDbContext _db;
+        private readonly ISentimentService _sentiment;
 
-        public MessageService(ApplicationDbContext context, ISentimentService sentimentService)
+        public MessageService(ApplicationDbContext db, ISentimentService sentiment)
         {
-            _context = context;
-            _sentimentService = sentimentService;
+            _db = db;
+            _sentiment = sentiment;
         }
 
         public async Task<MessageDto> CreateMessageAsync(CreateMessageDto dto)
         {
-            var user = await _context.Users.FindAsync(dto.UserId);
+            var user = await _db.Users.FindAsync(dto.UserId);
+            if (user == null) throw new ArgumentException("Kullanıcı bulunamadı");
 
-            if (user == null)
-                throw new ArgumentException("Kullanıcı bulunamadı");
+            var msg = new Message { UserId = dto.UserId, Content = dto.Content };
+            _db.Messages.Add(msg);
+            await _db.SaveChangesAsync();
 
-            var message = new Message
-            {
-                UserId = dto.UserId,
-                Content = dto.Content
-            };
-
-            _context.Messages.Add(message);
-            await _context.SaveChangesAsync();
-
-            var sentiment = await _sentimentService.AnalyzeSentimentAsync(dto.Content);
-
-            message.Sentiment = sentiment.Sentiment;
-            message.SentimentScore = sentiment.SentimentScore;
-
-            await _context.SaveChangesAsync();
+            var s = await _sentiment.AnalyzeSentimentAsync(dto.Content);
+            msg.Sentiment = s.Sentiment;
+            msg.SentimentScore = s.SentimentScore;
+            await _db.SaveChangesAsync();
 
             return new MessageDto
             {
-                Id = message.Id,
-                UserId = message.UserId,
+                Id = msg.Id,
+                UserId = msg.UserId,
                 Username = user.Username,
-                Content = message.Content,
-                Sentiment = message.Sentiment,
-                SentimentScore = message.SentimentScore,
-                CreatedAt = message.CreatedAt
+                Content = msg.Content,
+                Sentiment = msg.Sentiment,
+                SentimentScore = msg.SentimentScore,
+                CreatedAt = msg.CreatedAt
             };
         }
 
         public async Task<List<MessageDto>> GetMessagesAsync()
         {
-            return await _context.Messages
+            return await _db.Messages
                 .Include(m => m.User)
                 .OrderBy(m => m.CreatedAt)
                 .Select(m => new MessageDto
