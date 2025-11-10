@@ -17,19 +17,9 @@ builder.Services.AddCors(options =>
     options.AddPolicy("AllowFrontend", policy =>
     {
         policy
-            .SetIsOriginAllowed(origin =>
-            {
-                if (string.IsNullOrWhiteSpace(origin)) return false;
-                
-                if (!Uri.TryCreate(origin, UriKind.Absolute, out var uri))
-                    return false;
-                
-                var host = uri.Host;
-                return host.EndsWith("vercel.app") || host.Equals("localhost");
-            })
-            .WithMethods("GET", "POST")
-            .WithHeaders("Content-Type", "Authorization")
-            .AllowCredentials();
+            .AllowAnyOrigin()
+            .AllowAnyMethod()
+            .AllowAnyHeader();
     });
 });
 
@@ -50,7 +40,6 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseCors("AllowFrontend");
-app.UseHttpsRedirection();
 app.MapControllers();
 
 using (var scope = app.Services.CreateScope())
@@ -59,10 +48,7 @@ using (var scope = app.Services.CreateScope())
     db.Database.EnsureCreated();
 }
 
-var port = Environment.GetEnvironmentVariable("PORT");
-if (!string.IsNullOrEmpty(port))
-{
-    app.Urls.Add($"http://0.0.0.0:{port}");
-}
+var port = Environment.GetEnvironmentVariable("PORT") ?? "5000";
+app.Urls.Add($"http://0.0.0.0:{port}");
 
 app.Run();
