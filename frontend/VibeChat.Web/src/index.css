@@ -1,0 +1,106 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply box-border;
+  }
+
+  html {
+    @apply antialiased;
+  }
+
+  body {
+    @apply bg-app-bg text-app-text font-sans m-0 min-h-screen;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+}
+
+@layer components {
+  .focus-ring {
+    @apply outline-none ring-2 ring-app-primary-focus ring-offset-2 ring-offset-app-bg;
+  }
+
+  .btn-primary {
+    @apply bg-app-primary hover:bg-app-primary-hover text-white font-medium px-4 py-2 rounded-lg transition-colors duration-200;
+  }
+
+  .btn-primary:focus-visible {
+    @apply focus-ring;
+  }
+
+  .input-field {
+    @apply bg-app-surface border border-app-border text-app-text px-3 py-2 rounded-lg w-full;
+    @apply focus:border-app-primary focus:outline-none;
+  }
+
+  .input-field:focus-visible {
+    @apply focus-ring;
+  }
+
+  .chat-bubble {
+    @apply rounded-bubble p-3 max-w-[78%] break-words;
+  }
+
+  .chat-bubble-left {
+    @apply chat-bubble bg-app-surface border border-app-border;
+    @apply transition-all duration-200 ease-in-out;
+  }
+
+  .chat-bubble-left:hover {
+    @apply bg-app-surface-secondary border-app-text-muted shadow-lg;
+    transform: translateY(-1px);
+  }
+
+  .chat-bubble-right {
+    @apply chat-bubble bg-gradient-to-br from-app-surface to-app-surface-secondary border border-app-border;
+    @apply transition-all duration-200 ease-in-out;
+  }
+
+  .chat-bubble-right:hover {
+    @apply border-app-primary shadow-lg;
+    transform: translateY(-1px);
+  }
+
+  .sentiment-chip {
+    @apply inline-flex items-center gap-1 px-2 py-1 rounded-md text-xs font-medium;
+  }
+
+  .sentiment-chip-positive {
+    @apply sentiment-chip bg-sentiment-positive-bg text-sentiment-positive;
+  }
+
+  .sentiment-chip-neutral {
+    @apply sentiment-chip bg-sentiment-neutral-bg text-sentiment-neutral;
+  }
+
+  .sentiment-chip-negative {
+    @apply sentiment-chip bg-sentiment-negative-bg text-sentiment-negative;
+  }
+}
+
+@layer utilities {
+  .scrollbar-thin {
+    scrollbar-width: thin;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-track {
+    @apply bg-app-surface-secondary;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    @apply bg-app-border rounded-full;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-thumb:hover {
+    @apply bg-app-text-muted;
+  }
+}
