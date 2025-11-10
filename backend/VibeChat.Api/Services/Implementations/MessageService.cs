@@ -11,32 +11,58 @@ namespace VibeChat.Api.Services.Implementations
         
         private readonly ApplicationDbContext _db;
         private readonly ISentimentService _sentiment;
+        private readonly ILogger<MessageService> _logger;
 
-        public MessageService(ApplicationDbContext db, ISentimentService sentiment)
+        public MessageService(ApplicationDbContext db, ISentimentService sentiment, ILogger<MessageService> logger)
         {
             _db = db;
             _sentiment = sentiment;
+            _logger = logger;
         }
 
         public async Task<MessageDto> CreateMessageAsync(CreateMessageDto dto)
         {
-            var user = await _db.Users.FindAsync(dto.UserId);
-            if (user == null) throw new ArgumentException("Kullanıcı bulunamadı");
+            // Verify user exists with optimized query (only fetch username)
+            var username = await _db.Users
+                .Where(u => u.Id == dto.UserId)
+                .Select(u => u.Username)
+                .FirstOrDefaultAsync();
 
-            var msg = new Message { UserId = dto.UserId, Content = dto.Content };
+            if (username == null)
+                throw new InvalidOperationException($"Kullanıcı bulunamadı: {dto.UserId}");
+
+            // Create message entity
+            var msg = new Message 
+            { 
+                UserId = dto.UserId, 
+                Content = dto.Content,
+                CreatedAt = DateTime.UtcNow
+            };
+
+            try
+            {
+                // Analyze sentiment before saving
+                var sentimentResult = await _sentiment.AnalyzeSentimentAsync(dto.Content);
+                msg.Sentiment = sentimentResult.Sentiment;
+                msg.SentimentScore = sentimentResult.SentimentScore;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Sentiment analysis failed for message. Saving with default values.");
+                // Continue with default null values if sentiment analysis fails
+                msg.Sentiment = "nötr";
+                msg.SentimentScore = 0;
+            }
+
+            // Single database save
             _db.Messages.Add(msg);
-            await _db.SaveChangesAsync();
-
-            var s = await _sentiment.AnalyzeSentimentAsync(dto.Content);
-            msg.Sentiment = s.Sentiment;
-            msg.SentimentScore = s.SentimentScore;
             await _db.SaveChangesAsync();
 
             return new MessageDto
             {
                 Id = msg.Id,
                 UserId = msg.UserId,
-                Username = user.Username,
+                Username = username,
                 Content = msg.Content,
                 Sentiment = msg.Sentiment,
                 SentimentScore = msg.SentimentScore,
@@ -53,7 +79,7 @@ namespace VibeChat.Api.Services.Implementations
                 {
                     Id = m.Id,
                     UserId = m.UserId,
-                    Username = m.User.Username,
+                    Username = m.User != null ? m.User.Username : "Unknown",
                     Content = m.Content,
                     Sentiment = m.Sentiment,
                     SentimentScore = m.SentimentScore,

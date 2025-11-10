@@ -19,22 +19,23 @@ builder.Services.AddCors(options =>
         policy
             .SetIsOriginAllowed(origin =>
             {
-                try
-                {
-                    var host = new Uri(origin).Host;
-                    return host.EndsWith("vercel.app") || host.Equals("localhost");
-                }
-                catch { return false; }
+                if (string.IsNullOrWhiteSpace(origin)) return false;
+                
+                if (!Uri.TryCreate(origin, UriKind.Absolute, out var uri))
+                    return false;
+                
+                var host = uri.Host;
+                return host.EndsWith("vercel.app") || host.Equals("localhost");
             })
-            .AllowAnyHeader()
-            .AllowAnyMethod()
+            .WithMethods("GET", "POST")
+            .WithHeaders("Content-Type", "Authorization")
             .AllowCredentials();
     });
 });
 
 builder.Services.AddHttpClient<ISentimentService, SentimentService>(c =>
 {
-    c.Timeout = TimeSpan.FromSeconds(30);
+    c.Timeout = TimeSpan.FromSeconds(10);
 });
 
 builder.Services.AddScoped<IMessageService, MessageService>();
@@ -42,8 +43,11 @@ builder.Services.AddScoped<IUserService, UserService>();
 
 var app = builder.Build();
 
-app.UseSwagger();
-app.UseSwaggerUI();
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
 
 app.UseCors("AllowFrontend");
 app.UseHttpsRedirection();
