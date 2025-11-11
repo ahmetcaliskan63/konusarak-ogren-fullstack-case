@@ -86,14 +86,13 @@ Native React Native deneyimi ile iOS ve Android platformlarında sorunsuz çalı
 
 **AI Araçları:**
 - **Cursor AI** - Frontend komponent geliştirme, styling assistance
-- **GitHub Copilot** - Boilerplate kod ve autocomplete
-- **ChatGPT-4** - Dokümantasyon ve problem solving
+- **ChatGPT-4** - Dokümantasyon ve problem solving (gerektiğinde kısa fikir desteği)
 
 ### Geliştirme Yaklaşımı
 
 **Backend (.NET Core API) - Ağırlıklı Manuel Geliştirme**
 
-Backend tarafında kritik business logic, database architecture ve AI entegrasyonu tamamen elle yazıldı. AI araçları sadece DTO class'ları ve temel konfigürasyon dosyalarında yardımcı oldu.
+Backend tarafında kritik business logic, database architecture ve AI entegrasyonu tamamen elle yazıldı. Gerektiğinde resmi dökümantasyon ve topluluk kaynakları araştırılarak ilerlenmiştir; yapay zekadan yalnızca ufak noktalarda fikir alınmış, nihai kodlar manuel yazılmıştır.
 
 **Elle Yazılan Backend Komponenleri:**
 - ✅ Tüm Service Layer (Business Logic)
@@ -101,7 +100,7 @@ Backend tarafında kritik business logic, database architecture ve AI entegrasyo
   - `SentimentService.cs` - Gradio API iletişim protokolü
   - `UserService.cs` - Kullanıcı yönetimi
 - ✅ Entity Framework Configuration
-  - `ApplicationDbContext.cs` - DbContext ve migrations
+  - `ApplicationDbContext.cs` - DbContext ve şema oluşturma (EnsureCreated)
   - `MessageConfiguration.cs` - Fluent API configurations
   - `UserConfiguration.cs` - Entity relationships
 - ✅ Controllers ve API Endpoints
@@ -454,7 +453,7 @@ demo.launch()
 
 **Visual Studio Kullanımı:**
 - Solution architecture ve project organization
-- Entity Framework Core migrations
+- Database schema management (EnsureCreated)
 - Dependency Injection configuration
 - NuGet package management
 - Debug ve diagnostics tools
@@ -900,7 +899,7 @@ cd backend/VibeChat.Api
 # Restore packages
 dotnet restore
 
-# Run migrations (otomatik)
+# Run (EF EnsureCreated ile ilk çalıştırmada tablo oluşturulur)
 dotnet run
 
 # API: http://localhost:5000
@@ -1239,7 +1238,7 @@ curl 'https://vibechat-api.onrender.com/api/Messages?limit=50&afterId=0'
 ### Backend
 
 - [x] RESTful API endpoint'leri çalışıyor
-- [x] Entity Framework migrations başarılı
+- [x] SQLite veritabanı şeması otomatik oluşturuluyor (EnsureCreated)
 - [x] AI servisi entegrasyonu aktif
 - [x] Error handling ve logging implementasyonu
 - [x] Swagger dokümantasyonu hazır
