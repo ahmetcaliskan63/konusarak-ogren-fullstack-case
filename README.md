@@ -1495,4 +1495,4 @@ Sorular ve geri bildirimler için:
 - Issues: https://github.com/ahmetcaliskan63/konusarak-ogren-fullstack-case/issues
 - E‑posta: ahmetcaliskan.dev@gmail.com
 
-Katkılar memnuniyetle karşılanır.
+
