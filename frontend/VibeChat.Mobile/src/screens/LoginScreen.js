@@ -5,10 +5,10 @@ import {
   StyleSheet,
   KeyboardAvoidingView,
   Platform,
-  Alert,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useChat } from '../hooks/useChat';
+import { useNotification } from '../hooks/useNotification';
 import Button from '../components/Common/Button';
 import Input from '../components/Common/Input';
 import { colors } from '../styles/colors';
@@ -17,28 +17,27 @@ import { spacing, fontSize, borderRadius } from '../styles/spacing';
 export default function LoginScreen({ navigation }) {
   const [username, setUsername] = useState('');
   const { login, loading } = useChat();
+  const notification = useNotification();
 
   const handleLogin = async () => {
     const trimmedUsername = username.trim();
 
     if (!trimmedUsername) {
-      Alert.alert('Hata', 'Lütfen bir kullanıcı adı girin');
+      notification.warning('Lütfen bir kullanıcı adı girin');
       return;
     }
 
     if (trimmedUsername.length < 3) {
-      Alert.alert('Hata', 'Kullanıcı adı en az 3 karakter olmalıdır');
+      notification.warning('Kullanıcı adı en az 3 karakter olmalıdır');
       return;
     }
 
     try {
       await login(trimmedUsername);
+      notification.success(`Hoş geldin, ${trimmedUsername}!`);
       navigation.replace('Chat');
     } catch (error) {
-      Alert.alert(
-        'Giriş Hatası',
-        error.message || 'Giriş yapılamadı. Lütfen tekrar deneyin.',
-      );
+      notification.error(error.message || 'Giriş yapılamadı. Lütfen tekrar deneyin.');
     }
   };
 
@@ -75,7 +74,7 @@ export default function LoginScreen({ navigation }) {
               title="Giriş Yap"
               onPress={handleLogin}
               loading={loading}
-              disabled={loading || !username.trim()}
+              disabled={loading}
               style={styles.loginButton}
             />
           </View>

@@ -2,11 +2,11 @@ import React, { useEffect, useState, useCallback } from 'react';
 import {
   StyleSheet,
   TouchableOpacity,
-  Alert,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { useChat } from '../hooks/useChat';
+import { useNotification } from '../hooks/useNotification';
 import ChatList from '../components/Chat/ChatList';
 import ChatInput from '../components/Chat/ChatInput';
 import { colors } from '../styles/colors';
@@ -15,6 +15,7 @@ import { spacing } from '../styles/spacing';
 export default function ChatScreen({ navigation }) {
   const { currentUser, messages, loading, loadMessages, sendMessage, logout } =
     useChat();
+  const notification = useNotification();
   const [sending, setSending] = useState(false);
 
   useEffect(() => {
@@ -23,33 +24,27 @@ export default function ChatScreen({ navigation }) {
       return;
     }
 
-    loadMessages();
-  }, [currentUser, navigation]);
+    loadMessages().catch(() => {
+      notification.error('Mesajlar yüklenirken bir hata oluştu');
+    });
+  }, [currentUser, navigation, notification]);
 
   const handleSendMessage = async content => {
     setSending(true);
     try {
       await sendMessage(content);
     } catch (error) {
-      Alert.alert('Hata', 'Mesaj gönderilemedi. Lütfen tekrar deneyin.');
+      notification.error('Mesaj gönderilemedi. Lütfen tekrar deneyin.');
     } finally {
       setSending(false);
     }
   };
 
-  const handleLogout = useCallback(() => {
-    Alert.alert('Çıkış', 'Çıkış yapmak istediğinize emin misiniz?', [
-      { text: 'İptal', style: 'cancel' },
-      {
-        text: 'Çıkış',
-        style: 'destructive',
-        onPress: async () => {
-          await logout();
-          navigation.replace('Login');
-        },
-      },
-    ]);
-  }, [logout, navigation]);
+  const handleLogout = useCallback(async () => {
+    await logout();
+    notification.info('Çıkış yapıldı');
+    navigation.replace('Login');
+  }, [logout, navigation, notification]);
 
   const handleRefresh = useCallback(() => {
     loadMessages();
