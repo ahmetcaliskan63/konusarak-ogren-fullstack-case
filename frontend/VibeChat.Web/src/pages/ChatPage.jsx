@@ -19,9 +19,8 @@ export default function ChatPage() {
       return;
     }
 
-    loadMessages().catch((err) => {
+    loadMessages().catch(() => {
       notification.error('Mesajlar yüklenirken bir hata oluştu');
-      console.error('Mesajlar yüklenemedi:', err);
     });
   }, [currentUser, navigate, notification]);
 
@@ -31,7 +30,6 @@ export default function ChatPage() {
       await sendMessage(content);
     } catch (err) {
       notification.error('Mesaj gönderilemedi. Lütfen tekrar deneyin.');
-      console.error('Mesaj gönderilemedi:', err);
     } finally {
       setSending(false);
     }

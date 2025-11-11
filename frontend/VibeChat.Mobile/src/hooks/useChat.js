@@ -35,7 +35,6 @@ export function useChat() {
       setMessages(data);
     } catch (err) {
       setError(err.message || 'Mesajlar yüklenemedi');
-      console.error('Mesajlar yüklenemedi:', err);
     } finally {
       setLoading(false);
     }
@@ -78,7 +77,6 @@ export function useChat() {
       setMessages((prev) =>
         prev.filter((msg) => msg.id !== optimisticMessage.id)
       );
-      console.error('Mesaj gönderilemedi:', err);
       throw err;
     }
   };
@@ -93,7 +91,6 @@ export function useChat() {
       return user;
     } catch (err) {
       setError(err.message || 'Giriş yapılamadı');
-      console.error('Giriş yapılamadı:', err);
       throw err;
     } finally {
       setLoading(false);

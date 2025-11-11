@@ -20,7 +20,6 @@ export function ChatProvider({ children }) {
         setCurrentUser(JSON.parse(savedUser));
       }
     } catch (err) {
-      console.error('Kullanıcı bilgisi yüklenemedi:', err);
       await AsyncStorage.removeItem('vibechat_user');
     }
   };
@@ -30,7 +29,7 @@ export function ChatProvider({ children }) {
       setCurrentUser(user);
       await AsyncStorage.setItem('vibechat_user', JSON.stringify(user));
     } catch (err) {
-      console.error('Kullanıcı kaydedilemedi:', err);
+      // Silent fail
     }
   };
 
@@ -40,7 +39,7 @@ export function ChatProvider({ children }) {
       setMessages([]);
       await AsyncStorage.removeItem('vibechat_user');
     } catch (err) {
-      console.error('Çıkış yapılamadı:', err);
+      // Silent fail
     }
   };
 

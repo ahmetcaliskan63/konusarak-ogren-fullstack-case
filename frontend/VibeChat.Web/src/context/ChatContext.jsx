@@ -14,7 +14,6 @@ export function ChatProvider({ children }) {
       try {
         setCurrentUser(JSON.parse(savedUser));
       } catch (err) {
-        console.error('Kullanıcı bilgisi yüklenemedi:', err);
         localStorage.removeItem('vibechat_user');
       }
     }

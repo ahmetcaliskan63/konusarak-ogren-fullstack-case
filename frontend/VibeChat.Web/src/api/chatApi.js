@@ -27,7 +27,6 @@ export async function createUser(username) {
     const response = await apiClient.post('/api/Users', { username });
     return response.data;
   } catch (error) {
-    console.error('Kullanıcı oluşturma hatası:', error);
     throw error;
   }
 }
@@ -37,7 +36,6 @@ export async function getUsers() {
     const response = await apiClient.get('/api/Users');
     return response.data;
   } catch (error) {
-    console.error('Kullanıcıları getirme hatası:', error);
     throw error;
   }
 }
@@ -51,7 +49,6 @@ export async function getMessages(limit, afterId) {
     const response = await apiClient.get('/api/Messages', { params });
     return response.data;
   } catch (error) {
-    console.error('Mesajları getirme hatası:', error);
     throw error;
   }
 }
@@ -64,7 +61,6 @@ export async function sendMessage(userId, content) {
     });
     return response.data;
   } catch (error) {
-    console.error('Mesaj gönderme hatası:', error);
     throw error;
   }
 }
