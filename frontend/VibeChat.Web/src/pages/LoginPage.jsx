@@ -1,29 +1,35 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useChat } from '../hooks/useChat';
+import { useNotification } from '../hooks/useNotification';
 import Button from '../components/Common/Button';
 import Input from '../components/Common/Input';
 
 export default function LoginPage() {
   const [username, setUsername] = useState('');
-  const [error, setError] = useState('');
   const { handleLogin, loading } = useChat();
   const navigate = useNavigate();
+  const notification = useNotification();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError('');
+
+    if (!username.trim()) {
+      notification.warning('Lütfen bir kullanıcı adı girin');
+      return;
+    }
 
     if (username.trim().length < 3) {
-      setError('Kullanıcı adı en az 3 karakter olmalıdır');
+      notification.warning('Kullanıcı adı en az 3 karakter olmalıdır');
       return;
     }
 
     try {
       await handleLogin(username);
+      notification.success(`Hoş geldin, ${username}!`);
       navigate('/chat');
     } catch (err) {
-      setError(err.message);
+      notification.error(err.message || 'Giriş yapılamadı');
     }
   };
 
@@ -50,7 +56,6 @@ export default function LoginPage() {
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               placeholder="En az 3 karakter"
-              error={error}
               disabled={loading}
               autoFocus
               required
@@ -59,7 +64,7 @@ export default function LoginPage() {
             <Button
               type="submit"
               variant="primary"
-              disabled={loading || username.trim().length < 3}
+              disabled={loading}
               className="w-full"
             >
               {loading ? 'Giriş yapılıyor...' : 'Giriş Yap'}

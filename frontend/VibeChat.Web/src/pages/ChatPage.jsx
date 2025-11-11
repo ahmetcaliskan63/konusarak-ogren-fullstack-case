@@ -1,14 +1,16 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useChat } from '../hooks/useChat';
+import { useNotification } from '../hooks/useNotification';
 import ChatList from '../components/Chat/ChatList';
 import ChatInput from '../components/Chat/ChatInput';
 import Button from '../components/Common/Button';
 import { IoLogOutOutline } from 'react-icons/io5';
 
 export default function ChatPage() {
-  const { currentUser, messages, loading, error, loadMessages, sendMessage, logout, clearError } = useChat();
+  const { currentUser, messages, loading, loadMessages, sendMessage, logout } = useChat();
   const navigate = useNavigate();
+  const notification = useNotification();
   const [sending, setSending] = useState(false);
 
   useEffect(() => {
@@ -18,15 +20,17 @@ export default function ChatPage() {
     }
 
     loadMessages().catch((err) => {
+      notification.error('Mesajlar yüklenirken bir hata oluştu');
       console.error('Mesajlar yüklenemedi:', err);
     });
-  }, [currentUser, navigate]);
+  }, [currentUser, navigate, notification]);
 
   const handleSendMessage = async (content) => {
     setSending(true);
     try {
       await sendMessage(content);
     } catch (err) {
+      notification.error('Mesaj gönderilemedi. Lütfen tekrar deneyin.');
       console.error('Mesaj gönderilemedi:', err);
     } finally {
       setSending(false);
@@ -83,22 +87,6 @@ export default function ChatPage() {
           </div>
         </div>
       </header>
-
-      {error && (
-        <div className="bg-sentiment-negative-bg border-l-4 border-sentiment-negative px-4 py-3">
-          <div className="max-w-7xl mx-auto flex items-center justify-between">
-            <p className="text-sm text-sentiment-negative">{error}</p>
-            <button
-              onClick={clearError}
-              className="text-sentiment-negative hover:text-app-text transition-colors"
-            >
-              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
-              </svg>
-            </button>
-          </div>
-        </div>
-      )}
 
       <ChatList
         messages={messages}
