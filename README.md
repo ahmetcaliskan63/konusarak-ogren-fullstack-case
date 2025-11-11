@@ -918,6 +918,27 @@ Android Studio (mobil için)
 
 ### 1. Backend (.NET API)
 
+#### Visual Studio 2022 ile Çalıştırma (Önerilen)
+1. Visual Studio 2022'yi açın
+2. `backend/backend.sln` çözüm dosyasını açın
+3. Solution Explorer'da başlangıç projesini `VibeChat.Api` olarak ayarlayın (Set as Startup Project)
+4. NuGet paketlerini geri yükleyin:
+   - Solution'a sağ tık → "Restore NuGet Packages"
+   - Gerekirse `Tools → NuGet Package Manager → Manage NuGet Packages for Solution...` ile kontrol edin
+5. Paketler (kontrol listesi):
+   - `Microsoft.EntityFrameworkCore`
+   - `Microsoft.EntityFrameworkCore.Sqlite`
+   - `Swashbuckle.AspNetCore` (Swagger için)
+6. `appsettings.Development.json` dosyasında varsayılan SQLite dosya yolunun yazılabilir olduğundan emin olun
+7. Çalıştırma:
+   - Üst çubuktan "VibeChat.Api" profilini seçin
+   - "IIS Express" yerine proje profili ile başlatın veya F5 (Debug) / Ctrl+F5 (Without Debugging)
+8. İlk çalıştırmada EF `EnsureCreated()` veritabanını ve tabloları otomatik oluşturur
+9. Doğrulama:
+   - API: `http://localhost:5000`
+   - Swagger: `http://localhost:5000/swagger`
+
+#### Komut Satırı ile Çalıştırma
 ```bash
 cd backend/VibeChat.Api
 
