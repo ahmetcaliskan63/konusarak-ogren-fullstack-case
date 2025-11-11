@@ -76,6 +76,38 @@ Native React Native deneyimi ile iOS ve Android platformlarında sorunsuz çalı
 
 ---
 
+## 🎯 MVP Özeti
+
+**FullStack + AI Stajyer Projesi**  
+Kullanıcıların sohbet edebildiği ve mesajların AI tarafından anlık duygu analiziyle (pozitif/nötr/negatif) görselleştirildiği basit bir web + mobil uygulama. Tüm katmanlar ücretsiz platformlarda deploy edilmiştir.
+
+- **React Web**: Basit chat ekranı; kullanıcı metin yazar → mesaj listesi + anlık duygu skoru
+- **React Native CLI**: Mobilde aynı chat deneyimi
+- **.NET Core API**: Rumuz ile kullanıcı oluşturma ve mesajların veritabanına kaydı
+- **Python AI Servisi**: Hugging Face Spaces üzerinde duygu analizi (BERT)
+- **Gerçek Zamanlı Akış**: Mesaj gönderildiğinde backend → AI servisine istek; analiz sonucu frontend’de anında görünür
+
+### Teknoloji ve Ücretsiz Hosting
+- **Frontend**: React (web) / React Native CLI (mobil) → Vercel (web)
+- **Backend**: .NET 6 + SQLite → Render (free web service)
+- **AI**: Python + Gradio API → Hugging Face Spaces
+
+### Teslim Gereksinimleri (Karşılandı)
+- GitHub klasör yapısı: `frontend/`, `backend/`, `ai-service/`
+- README: kurulum adımları ve kullanılan AI araçları
+- Çalışır demolar: Vercel (web), mobil APK, HF Space (AI endpoint), Render API URL
+- Kod Hakimiyeti Kanıtı: Dosya işlevleri açıklamaları; AI’ye bırakılmayan manuel kritik kod örnekleri
+
+---
+
+## 📅 3 Günlük Plan
+
+- **1. Gün**: GitHub repo; Hugging Face’te duygu analizi modeli API’si; .NET backend ile mesaj kayıt API’si
+- **2. Gün**: React web chat ekranı; backend + AI entegrasyonu; Vercel deploy
+- **3. Gün**: React Native CLI mobil ekranı; API ve AI entegrasyonu; README ve kod açıklamaları
+
+---
+
 ## 🤖 Geliştirme Süreci ve AI Kullanımı
 
 ### Development Environment
@@ -1440,7 +1472,7 @@ Bu proje, **FullStack + AI Stajyer Programı** kapsamında eğitim amaçlı geli
 
 **Ahmet Çalışkan**
 
-📧 GitHub: [@ahmetcaliskan63](https://github.com/ahmetcaliskan63)  
+📧 GitHub: [Ahmet Çalışkan](https://github.com/ahmetcaliskan63)  
 💼 LinkedIn: [Ahmet Çalışkan](https://linkedin.com/in/ahmetcaliskan)
 
 ---
@@ -1464,6 +1496,6 @@ Bu proje, **FullStack + AI Stajyer Programı** kapsamında eğitim amaçlı geli
 
 Sorularınız veya önerileriniz için:
 - GitHub Issues: [Create an issue](https://github.com/ahmetcaliskan63/konusarak-ogren-fullstack-case/issues)
-- Email: ahmetcaliskan@example.com
+- Email: ahmetcaliskan.dev@gmail.com
 
 **Bu proje aktif olarak geliştirilmektedir. Katkılarınız ve geri bildirimleriniz değerlidir!** 🚀
