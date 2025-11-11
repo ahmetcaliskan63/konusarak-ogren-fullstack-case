@@ -13,18 +13,22 @@ Real-time chat uygulaması ile her mesaj **Türkçe duygu analizi** (pozitif/nö
 ## 📸 Önizleme
 
 ### Web Uygulaması
+Modern, responsive dark-mode tasarım ile kullanıcı dostu arayüz. Her mesajda AI sentiment analizi real-time görüntülenir.
+
 <p align="center">
-  <img src="assets/screenshots/web-login.png" width="45%" alt="Web Login" />
-  <img src="assets/screenshots/web-chat.png" width="45%" alt="Web Chat" />
+  <img src="frontend/VibeChat.Web/src/assets/web-login.png" width="45%" alt="Web Login Screen" />
+  <img src="frontend/VibeChat.Web/src/assets/web-chat.png" width="45%" alt="Web Chat with AI Sentiment" />
 </p>
 
 ### Mobile Uygulama
+Native React Native deneyimi ile iOS ve Android platformlarında sorunsuz çalışır.
+
 <p align="center">
-  <img src="assets/screenshots/mobile-login.png" width="30%" alt="Mobile Login" />
-  <img src="assets/screenshots/mobile-chat.png" width="30%" alt="Mobile Chat" />
+  <img src="frontend/VibeChat.Mobile/src/assets/mobil-login.jpg" width="30%" alt="Mobile Login Screen" />
+  <img src="frontend/VibeChat.Mobile/src/assets/mobil-chat.jpg" width="30%" alt="Mobile Chat with Sentiment Analysis" />
 </p>
 
-> **Not:** Her mesaj gerçek zamanlı olarak AI tarafından analiz edilir ve pozitif/nötr/negatif sentiment skoru ile görüntülenir.
+> 💡 **AI Analizi:** Her mesaj gönderildiğinde otomatik olarak Türkçe BERT model ile analiz edilir ve pozitif/nötr/negatif sentiment skoru (%99 accuracy) ile birlikte gösterilir.
 
 ---
 
