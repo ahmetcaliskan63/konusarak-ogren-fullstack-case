@@ -882,6 +882,31 @@ if __name__ == "__main__":
 
 ## 🚀 Kurulum ve Çalıştırma
 
+### Geliştirme Araçları Kurulumu (VS & VS Code)
+
+#### Visual Studio 2022 (Backend için önerilen)
+1. İndir: https://visualstudio.microsoft.com/downloads/
+2. Installer’da aşağıdaki workload’u seçin:
+   - "ASP.NET and web development" (includes .NET 6 tooling)
+3. Ek bileşenler (kontrol edin):
+   - .NET 6 SDK & targeting packs
+   - NuGet Package Manager (varsayılan gelir)
+4. Doğrulama:
+   - Terminal: `dotnet --info` (SDK 6.x görünmeli)
+
+#### Visual Studio Code (Frontend & AI servis için önerilen)
+1. İndir: https://code.visualstudio.com/
+2. Önerilen eklentiler:
+   - ESLint (dbaeumer.vscode-eslint)
+   - Prettier (esbenp.prettier-vscode)
+   - React Native Tools (ms-vscode.vscode-react-native)
+   - Python (ms-python.python) — AI servis için
+3. Doğrulama:
+   - `code --version`
+   - `node -v` ve `npm -v` (Node 18+)
+
+---
+
 ### Önkoşullar
 
 ```bash
