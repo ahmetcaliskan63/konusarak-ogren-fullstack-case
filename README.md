@@ -66,7 +66,7 @@ Native React Native deneyimi ile iOS ve Android platformlarında sorunsuz çalı
 
 | Platform | URL | Durum | Notlar |
 |----------|-----|-------|--------|
-| **🌍 Web App** | [vibechat-web.vercel.app](https://vibechat-web.vercel.app) | ✅ Live | Vercel deployment |
+| **🌍 Web App** | [vibechat-web-phi.vercel.app](https://vibechat-web-phi.vercel.app) | ✅ Live | Vercel deployment |
 | **🚀 Backend API** | [vibechat-api.onrender.com](https://vibechat-api.onrender.com) | ✅ Live | Render free tier |
 | **📖 API Docs** | [vibechat-api.onrender.com/swagger](https://vibechat-api.onrender.com/swagger) | ✅ Live | Swagger UI (interactive) |
 | **🤖 AI Service** | [ahmetcan3281-sentiment-analyzer.hf.space](https://ahmetcan3281-sentiment-analyzer.hf.space) | ✅ Live | Hugging Face Spaces |
