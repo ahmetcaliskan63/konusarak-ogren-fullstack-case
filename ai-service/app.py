@@ -118,13 +118,13 @@ def sentiment_interface(text):
 
 # Tek bir Interface - hem web hem API için JSON döndürür
 app = gr.Interface(
-    fn=analyze_sentiment_api,  # JSON string döndüren fonksiyon
+    fn=analyze_sentiment_api,  
     inputs=gr.Textbox(
         label="Mesaj",
         placeholder="Analiz etmek istediğiniz metni girin...",
         lines=3
     ),
-    outputs=gr.JSON(label="Duygu Analizi Sonucu"),  # JSON output
+    outputs=gr.JSON(label="Duygu Analizi Sonucu"),  
     title="Sentiment Analyzer - Duygu Analizi",
     description="Metinlerin duygu durumunu analiz eder (Pozitif/Nötr/Negatif) - JSON API",
     examples=[
