@@ -1468,34 +1468,31 @@ Bu proje, **FullStack + AI Stajyer Programı** kapsamında eğitim amaçlı geli
 
 ---
 
-## 👨‍💻 Geliştirici
+## Geliştirici
 
-**Ahmet Çalışkan**
+Ahmet Çalışkan
 
-📧 GitHub: [Ahmet Çalışkan](https://github.com/ahmetcaliskan63)  
-💼 LinkedIn: [Ahmet Çalışkan](https://linkedin.com/in/ahmetcaliskan)
-
----
-
-## 🙏 Teşekkürler
-
-- **Hugging Face** - AI model hosting ve Spaces platformu
-- **Render** - Backend hosting (free tier)
-- **Vercel** - Frontend hosting ve deployment
-- **savasy** - Türkçe BERT sentiment model
-- **Microsoft** - .NET 6 framework
-- **Meta** - React ve React Native
+- GitHub: https://github.com/ahmetcaliskan63
+- LinkedIn: https://linkedin.com/in/ahmetcaliskan
+- E‑posta: ahmetcaliskan.dev@gmail.com
 
 ---
 
-⭐ **Projeyi beğendiyseniz star vermeyi unutmayın!**
+## Katkı ve Teşekkür
+
+- Hugging Face — AI model hosting ve Spaces
+- Render — Backend hosting (free tier)
+- Vercel — Frontend hosting ve deployment
+- savasy — Türkçe BERT sentiment modeli
+- Microsoft — .NET 6 framework
+- Meta — React ve React Native
 
 ---
 
-## 📞 İletişim ve Destek
+## İletişim
 
-Sorularınız veya önerileriniz için:
-- GitHub Issues: [Create an issue](https://github.com/ahmetcaliskan63/konusarak-ogren-fullstack-case/issues)
-- Email: ahmetcaliskan.dev@gmail.com
+Sorular ve geri bildirimler için:
+- Issues: https://github.com/ahmetcaliskan63/konusarak-ogren-fullstack-case/issues
+- E‑posta: ahmetcaliskan.dev@gmail.com
 
-**Bu proje aktif olarak geliştirilmektedir. Katkılarınız ve geri bildirimleriniz değerlidir!** 🚀
+Katkılar memnuniyetle karşılanır.
