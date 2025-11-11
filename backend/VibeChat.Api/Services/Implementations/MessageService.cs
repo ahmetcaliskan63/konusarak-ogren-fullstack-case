@@ -22,7 +22,6 @@ namespace VibeChat.Api.Services.Implementations
 
         public async Task<MessageDto> CreateMessageAsync(CreateMessageDto dto)
         {
-            // Verify user exists with optimized query (only fetch username)
             var username = await _db.Users
                 .Where(u => u.Id == dto.UserId)
                 .Select(u => u.Username)
@@ -31,7 +30,6 @@ namespace VibeChat.Api.Services.Implementations
             if (username == null)
                 throw new InvalidOperationException($"Kullanıcı bulunamadı: {dto.UserId}");
 
-            // Create message entity
             var msg = new Message 
             { 
                 UserId = dto.UserId, 
@@ -41,7 +39,6 @@ namespace VibeChat.Api.Services.Implementations
 
             try
             {
-                // Analyze sentiment before saving
                 var sentimentResult = await _sentiment.AnalyzeSentimentAsync(dto.Content);
                 msg.Sentiment = sentimentResult.Sentiment;
                 msg.SentimentScore = sentimentResult.SentimentScore;
@@ -49,12 +46,10 @@ namespace VibeChat.Api.Services.Implementations
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Sentiment analysis failed for message. Saving with default values.");
-                // Continue with default null values if sentiment analysis fails
                 msg.Sentiment = "nötr";
                 msg.SentimentScore = 0;
             }
 
-            // Single database save
             _db.Messages.Add(msg);
             await _db.SaveChangesAsync();
 
@@ -74,7 +69,7 @@ namespace VibeChat.Api.Services.Implementations
         {
             return await _db.Messages
                 .Include(m => m.User)
-                .OrderBy(m => m.CreatedAt)
+                .OrderByDescending(m => m.CreatedAt)
                 .Select(m => new MessageDto
                 {
                     Id = m.Id,

@@ -12,9 +12,6 @@ namespace VibeChat.Api.Features.Messages.Domain
         public double? SentimentScore { get; set; }     
         public DateTime CreatedAt { get; set; }     
 
-        // Navigation property - EF Core will populate this
         public User? User { get; set; }
     }
-
 }
-

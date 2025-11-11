@@ -2,9 +2,8 @@
 {
     public class SentimentResponseDto
     {
-        public string Sentiment { get; set; } = "nötr";   
-        public double SentimentScore { get; set; }   
-        public SentimentScoresDto? Scores { get; set; } 
+        public string Sentiment { get; set; } = "nötr";
+        public double SentimentScore { get; set; }
+        public SentimentScoresDto? Scores { get; set; }
     }
-
 }
