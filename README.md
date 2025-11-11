@@ -10,6 +10,24 @@ Real-time chat uygulaması ile her mesaj **Türkçe duygu analizi** (pozitif/nö
 
 ---
 
+## 📸 Önizleme
+
+### Web Uygulaması
+<p align="center">
+  <img src="assets/screenshots/web-login.png" width="45%" alt="Web Login" />
+  <img src="assets/screenshots/web-chat.png" width="45%" alt="Web Chat" />
+</p>
+
+### Mobile Uygulama
+<p align="center">
+  <img src="assets/screenshots/mobile-login.png" width="30%" alt="Mobile Login" />
+  <img src="assets/screenshots/mobile-chat.png" width="30%" alt="Mobile Chat" />
+</p>
+
+> **Not:** Her mesaj gerçek zamanlı olarak AI tarafından analiz edilir ve pozitif/nötr/negatif sentiment skoru ile görüntülenir.
+
+---
+
 ## 🌐 Canlı Linkler
 
 | Platform | URL | Notlar |
