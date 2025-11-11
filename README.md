@@ -11,7 +11,7 @@
 - **🚀 Backend API**: [https://vibechat-api.onrender.com](https://vibechat-api.onrender.com)
 - **📖 API Dokümantasyonu**: [https://vibechat-api.onrender.com/swagger](https://vibechat-api.onrender.com/swagger)
 - **🤖 AI Servisi**: [https://ahmetcan3281-sentiment-analyzer.hf.space](https://ahmetcan3281-sentiment-analyzer.hf.space)
-- **📱 Mobile APK**: [VibeChat-v1.0.apk](./VibeChat-v1.0.apk) (59 MB)
+- **📱 Mobile APK**: [VibeChat-v1.0-fixed.apk](./VibeChat-v1.0-fixed.apk) (56 MB)
 
 ---
 
