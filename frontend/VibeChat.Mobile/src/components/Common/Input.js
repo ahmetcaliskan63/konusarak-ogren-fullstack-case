@@ -17,7 +17,7 @@ export default function Input({
 }) {
   return (
     <View style={[styles.container, style]}>
-      {label && <Text style={styles.label}>{label}</Text>}
+      {label && <Text style={styles.label} writingDirection="ltr">{label}</Text>}
       <TextInput
         style={[
           styles.input,
@@ -31,9 +31,10 @@ export default function Input({
         multiline={multiline}
         numberOfLines={numberOfLines}
         maxLength={maxLength}
+        writingDirection="ltr"
         {...props}
       />
-      {error && <Text style={styles.errorText}>{error}</Text>}
+      {error && <Text style={styles.errorText} writingDirection="ltr">{error}</Text>}
     </View>
   );
 }

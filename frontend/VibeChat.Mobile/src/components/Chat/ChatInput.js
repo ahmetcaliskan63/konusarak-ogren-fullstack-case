@@ -37,6 +37,7 @@ export default function ChatInput({ onSendMessage, disabled }) {
             multiline
             maxLength={500}
             editable={!disabled}
+            writingDirection="ltr"
           />
           <TouchableOpacity
             style={[

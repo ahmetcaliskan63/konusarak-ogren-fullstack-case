@@ -48,13 +48,13 @@ export default function LoginScreen({ navigation }) {
         style={styles.keyboardView}>
         <View style={styles.content}>
           <View style={styles.header}>
-            <Text style={styles.title}>VibeChat</Text>
+            <Text style={styles.title} writingDirection="ltr">VibeChat</Text>
             <View style={styles.badge}>
-              <Text style={styles.badgeText}>MVP</Text>
+              <Text style={styles.badgeText} writingDirection="ltr">MVP</Text>
             </View>
           </View>
 
-          <Text style={styles.subtitle}>
+          <Text style={styles.subtitle} writingDirection="ltr">
             AI destekli duygu analizi ile sohbet et
           </Text>
 
@@ -79,7 +79,7 @@ export default function LoginScreen({ navigation }) {
             />
           </View>
 
-          <Text style={styles.footer}>
+          <Text style={styles.footer} writingDirection="ltr">
             Giriş yaparak mesajlarınızın AI tarafından analiz edilmesini kabul
             edersiniz.
           </Text>

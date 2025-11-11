@@ -45,7 +45,7 @@ export default function Button({
           color={variant === 'primary' ? '#FFFFFF' : colors.primary}
         />
       ) : (
-        <Text style={textStyles}>{title}</Text>
+        <Text style={textStyles} writingDirection="ltr">{title}</Text>
       )}
     </TouchableOpacity>
   );

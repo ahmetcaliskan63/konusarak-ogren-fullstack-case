@@ -56,15 +56,15 @@ export default function ChatMessage({ message, isOwnMessage }) {
           isOwnMessage ? styles.ownBubble : styles.otherBubble,
         ]}>
         <View style={styles.header}>
-          <Text style={styles.username}>
+          <Text style={styles.username} writingDirection="ltr">
             {message.username || 'Anonim'}
           </Text>
-          <Text style={styles.timestamp}>
+          <Text style={styles.timestamp} writingDirection="ltr">
             {formattedDate} • {formattedTime}
           </Text>
         </View>
 
-        <Text style={styles.content}>{message.content}</Text>
+        <Text style={styles.content} writingDirection="ltr">{message.content}</Text>
 
         {message.sentiment && (
           <View style={styles.sentimentContainer}>
@@ -81,11 +81,12 @@ export default function ChatMessage({ message, isOwnMessage }) {
                   style={[
                     styles.sentimentLabel,
                     { color: getSentimentColor(message.sentiment) },
-                  ]}>
+                  ]}
+                  writingDirection="ltr">
                   {getSentimentLabel(message.sentiment)}
                 </Text>
               </View>
-              <Text style={styles.score}>
+              <Text style={styles.score} writingDirection="ltr">
                 {formatScore(message.sentimentScore)}
               </Text>
             </View>
@@ -106,7 +107,7 @@ export default function ChatMessage({ message, isOwnMessage }) {
 
         {message.isOptimistic && (
           <View style={styles.loadingContainer}>
-            <Text style={styles.loadingText}>Gönderiliyor...</Text>
+            <Text style={styles.loadingText} writingDirection="ltr">Gönderiliyor...</Text>
           </View>
         )}
       </View>

@@ -34,8 +34,8 @@ export default function ChatList({
       <View style={styles.centerContainer}>
         <View style={styles.emptyContainer}>
           <Text style={styles.emptyEmoji}>💬</Text>
-          <Text style={styles.emptyTitle}>Henüz mesaj yok</Text>
-          <Text style={styles.emptySubtitle}>
+          <Text style={styles.emptyTitle} writingDirection="ltr">Henüz mesaj yok</Text>
+          <Text style={styles.emptySubtitle} writingDirection="ltr">
             İlk mesajı göndererek sohbete başla!{'\n'}AI duygu analizini
             göreceksin.
           </Text>

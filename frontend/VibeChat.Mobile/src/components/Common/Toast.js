@@ -83,7 +83,7 @@ export default function Toast({ type = 'info', message, onClose, duration = 4000
       ]}
     >
       <Icon name={icons[type]} size={24} color={iconColors[type]} />
-      <Text style={[styles.message, { color: iconColors[type] }]} numberOfLines={3}>
+      <Text style={[styles.message, { color: iconColors[type] }]} numberOfLines={3} writingDirection="ltr">
         {message}
       </Text>
       {onClose && (
